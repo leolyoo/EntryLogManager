@@ -1,5 +1,4 @@
 package entrylogmanager.presenter;
 
-public class MainPresenter {
-
+public interface Presenter {
 }
