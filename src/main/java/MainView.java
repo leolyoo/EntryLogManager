@@ -11,11 +11,14 @@ public class MainView implements Contract.View {
 
     public MainView() {
         presenter = new MainPresenter(this);
+
         final JFrame frame = new JFrame("[학생지원팀] 출입관리시스템 [학생지원팀]");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         tableModel = new DefaultTableModel(new String[]{"when", "id"}, 0);
+        final JTable table = new JTable(tableModel);
+        frame.add(new JScrollPane(table), BorderLayout.CENTER);
 
         digitField = new JDigitField();
         digitField.registerKeyboardAction(e -> {
@@ -24,10 +27,16 @@ public class MainView implements Contract.View {
                 presenter.addEntryLog(now(), getDigit());
             digitField.setText("");
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), JComponent.WHEN_FOCUSED);
-        final JTable table = new JTable(tableModel);
-
         frame.add(digitField, BorderLayout.NORTH);
-        frame.add(table, BorderLayout.CENTER);
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("파일");
+        menuBar.add(fileMenu);
+
+        JMenuItem loadItem = new JMenuItem("불러오기");
+        fileMenu.add(loadItem);
+
+        frame.setJMenuBar(menuBar);
 
         frame.setVisible(true);
     }
