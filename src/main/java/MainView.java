@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.time.LocalDateTime;
 
 public class MainView implements Contract.View {
@@ -12,7 +13,7 @@ public class MainView implements Contract.View {
     public MainView() {
         presenter = new MainPresenter(this);
 
-        final JFrame frame = new JFrame("[학생지원팀] 출입관리시스템 [학생지원팀]");
+        final JFrame frame = new JFrame("[�븰�깮吏��썝��] 異쒖엯愿�由ъ떆�뒪�뀥 [�븰�깮吏��썝��]");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -30,10 +31,18 @@ public class MainView implements Contract.View {
         frame.add(digitField, BorderLayout.NORTH);
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("파일");
+        JMenu fileMenu = new JMenu("�뙆�씪");
         menuBar.add(fileMenu);
 
-        JMenuItem loadItem = new JMenuItem("불러오기");
+        JMenuItem loadItem = new JMenuItem("遺덈윭�삤湲�");
+        loadItem.addActionListener(e -> {
+        	JFileChooser fileChooser = new JFileChooser();
+        	int result = fileChooser.showOpenDialog(frame);
+        	if (result == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = fileChooser.getSelectedFile();
+				presenter.loadFile(selectedFile);
+			}
+        });
         fileMenu.add(loadItem);
 
         frame.setJMenuBar(menuBar);

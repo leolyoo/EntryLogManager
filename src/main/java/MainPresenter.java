@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class MainPresenter implements Contract.Presenter {
     private final Contract.View view;
 
@@ -9,4 +11,10 @@ public class MainPresenter implements Contract.Presenter {
     public void addEntryLog(String when, String id) {
         view.addRow(when, id);
     }
+
+	@Override
+	public void loadFile(File selectedFile) {
+		System.out.println(selectedFile);
+		
+	}
 }
