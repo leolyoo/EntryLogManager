@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -37,6 +38,7 @@ public class MainView implements Contract.View {
         JMenuItem loadItem = new JMenuItem("遺덈윭�삤湲�");
         loadItem.addActionListener(e -> {
         	JFileChooser fileChooser = new JFileChooser();
+        	fileChooser.setFileFilter(new FileNameExtensionFilter("SQLite DB 파일", "db"));
         	int result = fileChooser.showOpenDialog(frame);
         	if (result == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = fileChooser.getSelectedFile();
