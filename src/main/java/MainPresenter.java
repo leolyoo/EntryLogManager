@@ -1,4 +1,3 @@
-import java.io.File;
 import java.sql.*;
 
 public class MainPresenter implements Contract.Presenter {
@@ -14,8 +13,7 @@ public class MainPresenter implements Contract.Presenter {
     }
 
 	@Override
-	public void loadFile(File selectedFile) {
-        String fileName = selectedFile.getAbsolutePath();
+	public void loadFile(String fileName) {
         try {
             Class.forName("org.sqlite.JDBC");
             String url = "jdbc:sqlite:" + fileName + (fileName.startsWith(".db", fileName.length() - 3) ? "" : ".db");

@@ -44,7 +44,7 @@ public class MainView implements Contract.View {
         loadItem.addActionListener(e -> {
             int result = fileChooser.showOpenDialog(frame);
             if (result == JFileChooser.APPROVE_OPTION) {
-                presenter.loadFile(fileChooser.getSelectedFile());
+                presenter.loadFile(fileChooser.getSelectedFile().getAbsolutePath());
             }
         });
         fileMenu.add(loadItem);

@@ -1,5 +1,3 @@
-import java.io.File;
-
 public interface Contract {
     interface View {
         void addRow(String date, String id);
@@ -12,6 +10,6 @@ public interface Contract {
     interface Presenter {
         void addEntryLog(String date, String id);
         
-        void loadFile(File selectedFile);
+        void loadFile(String fileName);
     }
 }
