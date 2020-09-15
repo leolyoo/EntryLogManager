@@ -18,7 +18,7 @@ public class MainView implements Contract.View {
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        tableModel = new DefaultTableModel(new String[]{"when", "id"}, 0);
+        tableModel = new DefaultTableModel(new String[]{"date", "id"}, 0);
         final JTable table = new JTable(tableModel);
         frame.add(new JScrollPane(table), BorderLayout.CENTER);
 
@@ -55,8 +55,8 @@ public class MainView implements Contract.View {
     }
 
     @Override
-    public void addRow(String when, String id) {
-        tableModel.addRow(new String[]{when, id});
+    public void addRow(String date, String id) {
+        tableModel.addRow(new String[]{date, id});
     }
 
     @Override

@@ -2,7 +2,7 @@ import java.io.File;
 
 public interface Contract {
     interface View {
-        void addRow(String when, String id);
+        void addRow(String date, String id);
 
         String now();
 
@@ -10,7 +10,7 @@ public interface Contract {
     }
 
     interface Presenter {
-        void addEntryLog(String when, String id);
+        void addEntryLog(String date, String id);
         
         void loadFile(File selectedFile);
     }

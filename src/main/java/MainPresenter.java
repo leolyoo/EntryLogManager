@@ -9,8 +9,8 @@ public class MainPresenter implements Contract.Presenter {
     }
 
     @Override
-    public void addEntryLog(String when, String id) {
-        view.addRow(when, id);
+    public void addEntryLog(String date, String id) {
+        view.addRow(date, id);
     }
 
 	@Override
@@ -21,14 +21,14 @@ public class MainPresenter implements Contract.Presenter {
             String url = "jdbc:sqlite:" + fileName + (fileName.startsWith(".db", fileName.length() - 3) ? "" : ".db");
             try (Connection conn = DriverManager.getConnection(url);
                  Statement stmt = conn.createStatement()) {
-                stmt.execute("CREATE TABLE IF NOT EXISTS entry_logs (\n"
-                        + "when text NOT NULL,\n"
+                stmt.executeUpdate("CREATE TABLE IF NOT EXISTS entry_logs (\n"
+                        + "date text NOT NULL,\n"
                         + "id text NOT NULL,\n"
-                        + "PRIMARY KEY(when, id)\n"
+                        + "PRIMARY KEY(date, id)\n"
                         + ");");
-                try (ResultSet rs = stmt.executeQuery("SELECT when, id FROM entry_logs")) {
+                try (ResultSet rs = stmt.executeQuery("SELECT date, id FROM entry_logs")) {
                     while (rs.next()) {
-                        addEntryLog(rs.getString("when"), rs.getString("id"));
+                        addEntryLog(rs.getString("date"), rs.getString("id"));
                     }
                 }
             } catch (SQLException e) {
