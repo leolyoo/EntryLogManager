@@ -1,6 +1,6 @@
 public interface Contract {
     interface View {
-        void addRow(String date, String id);
+        void addRow(String date, String code);
 
         String now();
 
@@ -8,8 +8,8 @@ public interface Contract {
     }
 
     interface Presenter {
-        void addEntryLog(String date, String id);
-        
-        void loadFile(String fileName);
+        void addEntryLog(String date, String code);
+
+        void loadDB(String fileName);
     }
 }

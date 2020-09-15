@@ -18,7 +18,7 @@ public class MainView implements Contract.View {
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        tableModel = new DefaultTableModel(new String[]{"date", "id"}, 0);
+        tableModel = new DefaultTableModel(new String[]{"date", "code"}, 0);
         final JTable table = new JTable(tableModel);
         frame.add(new JScrollPane(table), BorderLayout.CENTER);
 
@@ -40,11 +40,12 @@ public class MainView implements Contract.View {
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setFileFilter(new FileNameExtensionFilter("SQLite DB 파일", "db"));
 
-        JMenuItem loadItem = new JMenuItem("파일 불러오기");
+        JMenuItem loadItem = new JMenuItem("파일 선택/생성");
         loadItem.addActionListener(e -> {
             int result = fileChooser.showOpenDialog(frame);
             if (result == JFileChooser.APPROVE_OPTION) {
-                presenter.loadFile(fileChooser.getSelectedFile().getAbsolutePath());
+                tableModel.setNumRows(0);
+                presenter.loadDB(fileChooser.getSelectedFile().getAbsolutePath());
             }
         });
         fileMenu.add(loadItem);
@@ -55,8 +56,8 @@ public class MainView implements Contract.View {
     }
 
     @Override
-    public void addRow(String date, String id) {
-        tableModel.addRow(new String[]{date, id});
+    public void addRow(String date, String code) {
+        tableModel.addRow(new String[]{date, code});
     }
 
     @Override
