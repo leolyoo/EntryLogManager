@@ -3,18 +3,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.time.LocalDateTime;
 
 public class MainView implements Contract.View {
     private final DefaultTableModel tableModel;
     private final Contract.Presenter presenter;
     private final JDigitField digitField;
+    private final JFileChooser fileChooser;
 
     public MainView() {
         presenter = new MainPresenter(this);
 
-        final JFrame frame = new JFrame("[�븰�깮吏��썝��] 異쒖엯愿�由ъ떆�뒪�뀥 [�븰�깮吏��썝��]");
+        final JFrame frame = new JFrame("[학생지원팀] 출입관리시스템");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -32,18 +32,20 @@ public class MainView implements Contract.View {
         frame.add(digitField, BorderLayout.NORTH);
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("�뙆�씪");
+        JMenu fileMenu = new JMenu("DB 설정");
         menuBar.add(fileMenu);
 
-        JMenuItem loadItem = new JMenuItem("遺덈윭�삤湲�");
+        fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("SQLite DB 파일", "db"));
+
+        JMenuItem loadItem = new JMenuItem("파일 불러오기");
         loadItem.addActionListener(e -> {
-        	JFileChooser fileChooser = new JFileChooser();
-        	fileChooser.setFileFilter(new FileNameExtensionFilter("SQLite DB 파일", "db"));
-        	int result = fileChooser.showOpenDialog(frame);
-        	if (result == JFileChooser.APPROVE_OPTION) {
-				File selectedFile = fileChooser.getSelectedFile();
-				presenter.loadFile(selectedFile);
-			}
+            int result = fileChooser.showOpenDialog(frame);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                presenter.loadFile(fileChooser.getSelectedFile());
+            }
         });
         fileMenu.add(loadItem);
 
