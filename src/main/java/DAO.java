@@ -6,10 +6,10 @@ import java.util.Properties;
 
 public enum DAO {
     INSTANCE;
-    final ArrayList<DBListener> listeners = new ArrayList<>();
-    final Properties propertiesForReadOnly;
-    boolean driverLoaded;
-    boolean tableReady = false;
+    private final ArrayList<DBListener> listeners = new ArrayList<>();
+    private final Properties propertiesForReadOnly;
+    private boolean driverLoaded;
+    private boolean tableReady = false;
     private String url = "jdbc:sqlite:default.db";
 
     DAO() {
