@@ -26,5 +26,6 @@ public class MainPresenter implements Contract.Presenter, DBListener {
     @Override
     public void onDataUpdated(String date, String code) {
         view.addRow(date, code);
+        AudioHelper.INSTANCE.play();
     }
 }

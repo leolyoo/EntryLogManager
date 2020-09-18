@@ -49,7 +49,6 @@ public class MainView implements Contract.View {
             }
         });
         fileMenu.add(loadItem);
-
         frame.setJMenuBar(menuBar);
 
         frame.setVisible(true);
